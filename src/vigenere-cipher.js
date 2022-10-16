@@ -22,7 +22,6 @@ const { NotImplementedError } = require('../extensions/index.js');
 class VigenereCipheringMachine {
   constructor(mod) {
     this.mod = mod;
-    this.alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   }
   encrypt(message, key) {
     if (!message || !key) throw new Error('Incorrect arguments!');
@@ -65,7 +64,7 @@ class VigenereCipheringMachine {
     for (let i = 0; i < encMessage.length; i++) {
       if (encMessage.charCodeAt(i) < 65 || encMessage.charCodeAt(i) > 90) {
         res.push(encMessage[i]);
-      } else if (encMessage.charCodeAt(i) < key.charCodeAt(i)) res.push(String.fromCharCode((key.charCodeAt(i) - encMessage.charCodeAt(i)) % 26 + 65))
+      } else if (encMessage.charCodeAt(i) < key.charCodeAt(i)) res.push(String.fromCharCode((26 - (key.charCodeAt(i) - encMessage.charCodeAt(i))) + 65))
       else res.push(String.fromCharCode((encMessage.charCodeAt(i) - key.charCodeAt(i)) % 26 + 65))
     }
 
